@@ -16,7 +16,7 @@ class RegisterController
     {
         $role = Role::find($request->validated()['role_id']);
         $user = $role->users()->create($request->validated());
-        $token = $user->createToken('userToken')->plainTextToken;
+        $token = $user->createToken($request->ip())->plainTextToken;
         return responder()
             ->success($user, UserTransformer::class)
             ->meta(['token' => $token])
