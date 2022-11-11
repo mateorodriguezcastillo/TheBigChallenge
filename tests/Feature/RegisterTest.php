@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -25,52 +26,52 @@ class RegisterTest extends TestCase
                 'email' => 'mateo@mail.com',
                 'password' => 'Mateo123!',
                 'password_confirmation' => 'Mateo123!',
-                'role' => 'patient',
+                'role_id' => Role::DOCTOR,
             ]],
             ['no Password' => [
                 'name' => 'mateo',
                 'email' => 'mateo@mail.com',
-                'role' => 'patient',
+                'role_id' => Role::DOCTOR,
             ]],
             ['no Password Confirmation' => [
                 'name' => 'mateo',
                 'email' => 'mateo@mail.com',
                 'password' => 'Mateo123!',
-                'role' => 'patient',
+                'role_id' => Role::DOCTOR,
             ]],
             ['no email' => [
                 'name' => 'mateo',
                 'password' => 'Mateo123!',
                 'password_confirmation' => 'Mateo123!',
-                'role' => 'patient',
+                'role_id' => Role::DOCTOR,
             ]],
             ['invalid email' => [
                 'name' => 'mateo',
                 'email' => 'mateo.com',
                 'password' => 'Mateo123!',
                 'password_confirmation' => 'Mateo123!',
-                'role' => 'patient',
+                'role_id' => Role::DOCTOR,
             ]],
             ['invalid password' => [
                 'name' => 'mateo',
                 'email' => 'mateo@mail.com',
                 'password' => 'mateo',
                 'password_confirmation' => 'mateo',
-                'role' => 'patient',
+                'role_id' => Role::DOCTOR,
             ]],
             ['invalid password confirmation' => [
                 'name' => 'mateo',
                 'email' => '',
                 'password' => 'Mateo123!',
                 'password_confirmation' => 'Mateo123',
-                'role' => 'patient',
+                'role_id' => Role::DOCTOR,
             ]],
             ['invalid role' => [
                 'name' => 'mateo',
                 'email' => '',
                 'password' => 'Mateo123!',
                 'password_confirmation' => 'Mateo123!',
-                'role' => 'patient1',
+                'role_id' => 10,
             ]],
         ];
     }
@@ -80,11 +81,13 @@ class RegisterTest extends TestCase
         'email' => 'mateo@mail.com',
         'password' => 'Mateo123!',
         'password_confirmation' => 'Mateo123!',
-        'role' => 'patient',
+        'role_id' => Role::DOCTOR,
     ];
 
     public function testRegisterSuccessfully(): void
     {
+        Role::create(['name' => 'doctor']);
+
         $response = $this->postJson(route('user.register'), self::VALID_USER);
 
         $response->assertSuccessful();
