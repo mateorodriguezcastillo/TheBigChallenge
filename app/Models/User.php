@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Models;
+
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -68,7 +69,7 @@ class User extends Authenticatable implements MustVerifyEmail
      {
          return UserFactory::new();
      }
-     
+
     /**
       * @return BelongsTo<Role>
       */
@@ -76,3 +77,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function submissions()
+    {
+        return $this->hasMany(Submission::class, 'patient_id');
+    }
+}
