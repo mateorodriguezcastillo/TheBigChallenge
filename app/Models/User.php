@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Models;
-
+use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -64,6 +64,11 @@ class User extends Authenticatable implements MustVerifyEmail
         );
     }
 
+    protected static function newFactory(): UserFactory
+     {
+         return UserFactory::new();
+     }
+     
     /**
       * @return BelongsTo<Role>
       */
@@ -71,4 +76,3 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(Role::class);
     }
-}

@@ -29,6 +29,7 @@ class UserTransformer extends Transformer
      * @param  \App\User $user
      * @return array
      */
+
     public function transform(User $user): array
     {
         return [
