@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Transformers;
 
 use App\Models\User;
@@ -27,7 +29,8 @@ class UserTransformer extends Transformer
      * @param  \App\User $user
      * @return array
      */
-    public function transform(User $user)
+
+    public function transform(User $user): array
     {
         return [
             'id' => (int) $user->id,
