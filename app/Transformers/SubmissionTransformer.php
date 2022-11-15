@@ -31,8 +31,8 @@ class SubmissionTransformer extends Transformer
     {
         return [
             'id' => (int) $submission->id,
-            'patient_id' => (int) $submission->patient_id,
-            'doctor_id' => (int) $submission->doctor_id,
+            'patient' => (string) $submission->patient->name,
+            'doctor' => (string) $submission->doctor ? $submission->doctor->name : null,
             'title' => (string) $submission->title,
             'info' => (string) $submission->info,
             'symptoms' => (string) $submission->symptoms,

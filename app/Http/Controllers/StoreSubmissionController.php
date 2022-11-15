@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSubmissionRequest;
 use App\Transformers\SubmissionTransformer;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class StoreSubmissionController extends Controller
 {

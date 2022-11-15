@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Submission extends Model
 {
@@ -24,15 +26,21 @@ class Submission extends Model
     ];
 
     protected $attributes = [
-        'status' => 'pending',
+        'status' => Status::PENDING,
     ];
 
-    public function patient()
+    /**
+      * @return BelongsTo<Role>
+      */
+    public function patient(): BelongsTo
     {
         return $this->belongsTo(User::class, 'patient_id');
     }
 
-    public function doctor()
+    /**
+      * @return BelongsTo<Role>
+      */
+    public function doctor(): BelongsTo
     {
         return $this->belongsTo(User::class, 'doctor_id');
     }
