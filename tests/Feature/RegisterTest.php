@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Role;
+use Database\Factories\RoleFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -15,7 +16,7 @@ class RegisterTest extends TestCase
      */
     public function test_user_cant_register_with_invalid_data($user): void
     {
-        $response = $this->postJson('/api/register', $user);
+        $response = $this->postJson(route('user.register'), $user);
         $response->assertUnprocessable();
     }
 
@@ -86,7 +87,7 @@ class RegisterTest extends TestCase
 
     public function testRegisterSuccessfully(): void
     {
-        Role::create(['name' => 'doctor']);
+        RoleFactory::new()->doctor()->create();
 
         $response = $this->postJson(route('user.register'), self::VALID_USER);
 
@@ -97,6 +98,8 @@ class RegisterTest extends TestCase
 
     public function testRegisterTakenEmail(): void
     {
+        RoleFactory::new()->doctor()->create();
+
         $this->postJson(route('user.register'), self::VALID_USER);
 
         $response = $this->postJson(route('user.register'), self::VALID_USER);
