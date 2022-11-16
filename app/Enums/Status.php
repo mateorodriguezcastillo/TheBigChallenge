@@ -13,9 +13,9 @@ use Rexlabs\Enum\Enum;
  */
 class Status extends Enum
 {
-    const PENDING = 1;
-    const IN_PROGRESS = 2;
-    const READY = 3;
+    const PENDING = "pending";
+    const IN_PROGRESS = "in_progress";
+    const READY = "ready";
 
     /**
      * Retrieve a map of enum keys and values.

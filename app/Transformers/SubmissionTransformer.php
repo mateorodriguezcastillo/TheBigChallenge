@@ -19,7 +19,10 @@ class SubmissionTransformer extends Transformer
      *
      * @var array
      */
-    protected $load = [];
+    protected $load = [
+        'patient',
+        'doctor',
+    ];
 
     /**
      * Transform the model.
@@ -31,8 +34,6 @@ class SubmissionTransformer extends Transformer
     {
         return [
             'id' => (int) $submission->id,
-            'patient' => (string) $submission->patient->name,
-            'doctor' => (string) $submission->doctor ? $submission->doctor->name : null,
             'title' => (string) $submission->title,
             'info' => (string) $submission->info,
             'symptoms' => (string) $submission->symptoms,
