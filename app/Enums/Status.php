@@ -13,16 +13,16 @@ use Rexlabs\Enum\Enum;
  */
 class Status extends Enum
 {
-    const PENDING = "pending";
-    const IN_PROGRESS = "in_progress";
-    const READY = "ready";
+    public const PENDING = "pending";
+    public const IN_PROGRESS = "in_progress";
+    public const READY = "ready";
 
     /**
      * Retrieve a map of enum keys and values.
      *
      * @return array
      */
-    public static function map() : array
+    public static function map(): array
     {
         return [
             static::PENDING => 'Pending',
