@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use Database\Factories\RoleFactory;
 use Database\Factories\SubmissionFactory;
 use Database\Factories\UserFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -14,8 +13,6 @@ class GetSubmissionTest extends TestCase
 
     public function test_patient_can_get_own_submission(): void
     {
-        RoleFactory::new()->patient()->create();
-        RoleFactory::new()->doctor()->create();
         $user = UserFactory::new()->patient()->create();
         $submission = SubmissionFactory::new()->create(['patient_id' => $user->id]);
 
@@ -25,8 +22,6 @@ class GetSubmissionTest extends TestCase
 
     public function test_doctor_can_get_own_submission(): void
     {
-        RoleFactory::new()->patient()->create();
-        RoleFactory::new()->doctor()->create();
         $user = UserFactory::new()->doctor()->create();
         $submission = SubmissionFactory::new()->create(['doctor_id' => $user->id]);
 
@@ -36,8 +31,6 @@ class GetSubmissionTest extends TestCase
 
     public function test_doctor_can_get_submission_with_no_doctor_assigned(): void
     {
-        RoleFactory::new()->patient()->create();
-        RoleFactory::new()->doctor()->create();
         $user = UserFactory::new()->doctor()->create();
         $submission = SubmissionFactory::new()->create(['doctor_id' => null]);
 
@@ -47,8 +40,6 @@ class GetSubmissionTest extends TestCase
 
     public function test_doctor_cant_get_submission_if_not_owner(): void
     {
-        RoleFactory::new()->patient()->create();
-        RoleFactory::new()->doctor()->create();
         $user = UserFactory::new()->doctor()->create();
         $user2 = UserFactory::new()->doctor()->create();
         $submission = SubmissionFactory::new()->create(['doctor_id' => $user->id]);
@@ -59,8 +50,6 @@ class GetSubmissionTest extends TestCase
 
     public function test_patient_cant_get_submission_if_not_owner(): void
     {
-        RoleFactory::new()->patient()->create();
-        RoleFactory::new()->doctor()->create();
         $user = UserFactory::new()->patient()->create();
         $user2 = UserFactory::new()->patient()->create();
         $submission = SubmissionFactory::new()->create(['patient_id' => $user->id]);
@@ -71,8 +60,6 @@ class GetSubmissionTest extends TestCase
 
     public function test_user_cant_get_submission_if_not_logged_in(): void
     {
-        RoleFactory::new()->patient()->create();
-        RoleFactory::new()->doctor()->create();
         $submission = SubmissionFactory::new()->create();
 
         $response = $this->getJson(route('submission.show', $submission->id));

@@ -44,10 +44,10 @@ class UserFactory extends Factory
      */
     public function doctor(): UserFactory
     {
-        return $this->state(function () {
-            return [
-                'role_id' => Role::DOCTOR,
-            ];
+        return $this->afterCreating(function ($user) {
+            $role = Role::firstOrNew(['name' => Role::DOCTOR]);
+            $role->save();
+            $role->users()->save($user);
         });
     }
 
@@ -56,10 +56,11 @@ class UserFactory extends Factory
      */
     public function patient(): UserFactory
     {
-        return $this->state(function () {
-            return [
-                'role_id' => Role::PATIENT,
-            ];
+        return $this->afterCreating(function ($user) {
+            $role = Role::firstOrNew(['name' => Role::PATIENT]);
+            $role->save();
+            $role->users()->save($user);
+
         });
     }
 }

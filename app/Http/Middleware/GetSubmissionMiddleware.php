@@ -18,9 +18,9 @@ class GetSubmissionMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if ((auth()->user()->role->id === Role::PATIENT && auth()->user()->id !== $request->submission->patient_id)
+        if ((auth()->user()->role->name === Role::PATIENT && auth()->user()->id !== $request->submission->patient_id)
                 ||
-            (auth()->user()->role->id === Role::DOCTOR && $request->submission->doctor_id != NULL && auth()->user()->id !== $request->submission->doctor_id)) {
+            (auth()->user()->role->name === Role::DOCTOR && $request->submission->doctor_id != NULL && auth()->user()->id !== $request->submission->doctor_id)) {
             return responder()
                 ->error()
                 ->respond(Response::HTTP_FORBIDDEN);
