@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('symptoms');
             //status can be pending, approved, rejected
             $table->string('status')->default('pending');
+            //file is the prescription file
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }
