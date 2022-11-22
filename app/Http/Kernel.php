@@ -64,5 +64,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'submission.upload' => \App\Http\Middleware\UploadPrescriptionMiddleware::class,
+        'submission.download' => \App\Http\Middleware\DownloadPrescriptionMiddleware::class,
+        'submission.delete' => \App\Http\Middleware\DeletePrescriptionMiddleware::class,
     ];
 }

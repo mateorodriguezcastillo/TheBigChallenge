@@ -6,6 +6,7 @@ use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Storage;
 use League\CommonMark\Node\Block\Document;
 
@@ -25,12 +26,10 @@ class Submission extends Model
         'info',
         'symptoms',
         'status',
-        'file'
     ];
 
     protected $attributes = [
         'status' => Status::PENDING,
-        'file' => null,
     ];
 
     /**
@@ -49,35 +48,11 @@ class Submission extends Model
         return $this->belongsTo(User::class, 'doctor_id');
     }
 
-    public function setFileAttribute($value)
+    /**
+      * @return HasOne<Prescription>
+      */
+    public function prescription(): HasOne
     {
-        if ($value !== null) {
-            $attribute_name = "file";
-            $disk = "do_spaces";
-            $destination_path = config('filesystems.disks.do_spaces.folder');
-            $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path);
-        }
-    }
-
-    function uploadFileToDisk($file, $attribute_name, $disk, $destination_path)
-    {
-        if (request()->hasFile($attribute_name)) {
-            $file = request()->file($attribute_name);
-            // dd($file);
-            $filename = $file->getClientOriginalName();
-            $path = $file->storeAs($destination_path, $filename, $disk);
-            $this->attributes[$attribute_name] = $path;
-        }
-    }
-
-    public function getFile($id)
-    {
-        $document = Document::find($id);
-        $file = Storage::disk('do_spaces')->get($document->file);
-        $mimetype = \GuzzleHttp\Psr7\MimeType::fromFilename($document->file);
-        $headers = [
-            'Content-Type' => $mimetype,
-        ];
-        return response($file, 200, $headers);
+        return $this->hasOne(Prescription::class);
     }
 }
