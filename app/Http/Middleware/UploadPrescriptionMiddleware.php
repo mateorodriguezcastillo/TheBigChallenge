@@ -3,7 +3,9 @@
 namespace App\Http\Middleware;
 
 use App\Enums\Status;
+use App\Models\Role;
 use Closure;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -16,9 +18,9 @@ class UploadPrescriptionMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): JsonResponse
     {
-        if ($request->user()->role->name !== 'doctor' || $request->user()->id !== $request->submission->doctor_id){
+        if ($request->user()->role->name !== Role::DOCTOR || $request->user()->id !== $request->submission->doctor_id) {
             return responder()
                 ->error('You are not authorized to upload a prescription.')
                 ->respond(Response::HTTP_FORBIDDEN);

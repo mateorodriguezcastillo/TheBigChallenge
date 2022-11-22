@@ -39,9 +39,9 @@ class PrescriptionUploaded extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail($notifiable): MailMessage
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject('A prescription has been uploaded for your submission')
             ->greeting('Hello ' . $this->submission->patient->name . "!")
             ->line('A prescription for your submission has been uploaded by Dr. ' . $this->submission->doctor->name . '.')
@@ -56,7 +56,7 @@ class PrescriptionUploaded extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray($notifiable)
+    public function toArray($notifiable): array
     {
         return [
             //
