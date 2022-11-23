@@ -9,7 +9,7 @@ class DownloadPrescriptionController extends Controller
 {
     public function __invoke(Submission $submission)
     {
-        $path = Storage::disk('do_spaces')->get($submission->prescription->path);
+        $path = Storage::get($submission->prescription->path);
         $headers = [
             'Content-Type' => 'application/plain',
             'Content-Descrption' => 'File Transfer',
