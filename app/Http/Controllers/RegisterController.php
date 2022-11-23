@@ -10,7 +10,7 @@ use App\Notifications\VerifyEmail;
 use App\Transformers\UserTransformer;
 use Illuminate\Http\JsonResponse;
 
-class RegisterController extends Controller
+class RegisterController
 {
     public function __invoke(RegisterRequest $request): JsonResponse
     {
