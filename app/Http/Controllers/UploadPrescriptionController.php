@@ -16,7 +16,7 @@ class UploadPrescriptionController extends Controller
     {
         $extension = $request->file('prescription')->extension();
         $mimeType = $request->file('prescription')->getMimeType();
-        $path = Storage::disk('do_spaces')->putFileAs(
+        $path = Storage::putFileAs(
             config('filesystems.disks.do_spaces.folder'),
             $request->file('prescription'),
             $submission->id . '.' . $extension
