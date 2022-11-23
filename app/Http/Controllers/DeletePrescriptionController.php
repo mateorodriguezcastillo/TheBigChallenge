@@ -11,7 +11,7 @@ class DeletePrescriptionController extends Controller
 {
     public function __invoke(Request $request, Submission $submission): JsonResponse
     {
-        Storage::disk('do_spaces')->delete($submission->prescription->path);
+        Storage::delete($submission->prescription->path);
         $submission->prescription->delete();
         return responder()->success($submission)->respond();
     }
