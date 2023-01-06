@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AcceptSubmissionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\GetSubmissionController;
 use App\Http\Controllers\GetSubmissionsController;
@@ -27,10 +28,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('/submission')
 ->name('submission.')
 ->group(function () {
-  Route::get('/', GetSubmissionsController::class)->name('index')->middleware('auth:sanctum');
   Route::get('/{submission}', GetSubmissionController::class)->name('show')->middleware('auth:sanctum', 'submission.show');
-  Route::get('/user/{user}', GetUserSubmissionsController::class)->name('user')->middleware('auth:sanctum', 'submission.user');
   Route::post('/', StoreSubmissionController::class)->name('store')->middleware('auth:sanctum');
+  Route::put('/{submission}/accept', AcceptSubmissionController::class)->name('accept')->middleware('auth:sanctum', 'submission.accept');
+  Route::get('/', GetSubmissionsController::class)->name('index')->middleware('auth:sanctum');
+  Route::get('/user/{user}', GetUserSubmissionsController::class)->name('user')->middleware('auth:sanctum', 'submission.user');
 });
 Route::post('/logout', LogoutController::class)->middleware('auth:sanctum')->name('user.logout');
 Route::post('login', LoginController::class)->name('user.login')->middleware('guest');
