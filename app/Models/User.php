@@ -62,13 +62,13 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     protected static function newFactory(): UserFactory
-     {
-         return UserFactory::new();
-     }
+    {
+        return UserFactory::new();
+    }
 
     /**
-      * @return BelongsTo<Role>
-      */
+     * @return BelongsTo<Role>
+     */
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
@@ -77,8 +77,24 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
       * @return HasMany<Submission>
       */
-    public function submissions(): HasMany
+    public function patientSubmissions(): HasMany
     {
         return $this->hasMany(Submission::class, 'patient_id');
+    }
+
+    /**
+      * @return HasMany<Submission>
+      */
+    public function doctorSubmissions(): HasMany
+    {
+        return $this->hasMany(Submission::class, 'doctor_id');
+    }
+
+    /**
+      * @return HasMany<Submission>
+      */
+    public function submissions(): HasMany
+    {
+        return $this->role->name === Role::PATIENT ? $this->patientSubmissions() : $this->doctorSubmissions();
     }
 }
