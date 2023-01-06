@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -36,5 +37,30 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+
+    /**
+     * @return \Database\Factories\UserFactory
+     */
+    public function doctor(): UserFactory
+    {
+        return $this->afterCreating(function ($user) {
+            $role = Role::firstOrNew(['name' => Role::DOCTOR]);
+            $role->save();
+            $role->users()->save($user);
+        });
+    }
+
+    /**
+     * @return \Database\Factories\UserFactory
+     */
+    public function patient(): UserFactory
+    {
+        return $this->afterCreating(function ($user) {
+            $role = Role::firstOrNew(['name' => Role::PATIENT]);
+            $role->save();
+            $role->users()->save($user);
+
+        });
     }
 }
