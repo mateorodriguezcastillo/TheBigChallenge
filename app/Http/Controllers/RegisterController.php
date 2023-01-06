@@ -14,7 +14,7 @@ class RegisterController
 {
     public function __invoke(RegisterRequest $request): JsonResponse
     {
-        $role = Role::find($request->validated()['role_id']);
+        $role = Role::where('name', $request->validated()['role'])->first();
         $user = $role->users()->create($request->validated());
         $token = $user->createToken($request->ip())->plainTextToken;
         event(new Registered($user));

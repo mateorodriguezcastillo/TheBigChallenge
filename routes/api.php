@@ -3,6 +3,9 @@
 use App\Http\Controllers\AcceptSubmissionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\GetSubmissionController;
+use App\Http\Controllers\GetSubmissionsController;
+use App\Http\Controllers\GetUserSubmissionsController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\StoreSubmissionController;
 use Illuminate\Http\Request;
@@ -28,8 +31,10 @@ Route::prefix('/submission')
   Route::get('/{submission}', GetSubmissionController::class)->name('show')->middleware('auth:sanctum', 'submission.show');
   Route::post('/', StoreSubmissionController::class)->name('store')->middleware('auth:sanctum');
   Route::put('/{submission}/accept', AcceptSubmissionController::class)->name('accept')->middleware('auth:sanctum', 'submission.accept');
+  Route::get('/', GetSubmissionsController::class)->name('index')->middleware('auth:sanctum');
+  Route::get('/user/{user}', GetUserSubmissionsController::class)->name('user')->middleware('auth:sanctum', 'submission.user');
 });
+Route::post('/logout', LogoutController::class)->middleware('auth:sanctum')->name('user.logout');
 Route::post('login', LoginController::class)->name('user.login')->middleware('guest');
 Route::post('register', RegisterController::class)->name('user.register')->middleware('guest');
-
 

@@ -29,6 +29,13 @@ class Submission extends Model
         'status' => Status::PENDING,
     ];
 
+    public function scopeFilter($query, array $filters): void
+    {
+        if (isset($filters['status'])) {
+            $query->where('status', $filters['status']);
+        }
+    }
+
     /**
       * @return BelongsTo<Role>
       */
