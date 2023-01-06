@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\DeletePrescriptionController;
+use App\Http\Controllers\DownloadPrescription;
+use App\Http\Controllers\DownloadPrescriptionController;
+use App\Http\Controllers\StoreSubmissionController;
 use App\Http\Controllers\AcceptSubmissionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\GetSubmissionController;
@@ -7,6 +11,7 @@ use App\Http\Controllers\GetSubmissionsController;
 use App\Http\Controllers\GetUserSubmissionsController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UploadPrescriptionController;
 use App\Http\Controllers\StoreSubmissionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,4 +42,7 @@ Route::prefix('/submission')
 Route::post('/logout', LogoutController::class)->middleware('auth:sanctum')->name('user.logout');
 Route::post('login', LoginController::class)->name('user.login')->middleware('guest');
 Route::post('register', RegisterController::class)->name('user.register')->middleware('guest');
+Route::post('submission/{submission}/prescription', UploadPrescriptionController::class)->name('submission.prescription.upload')->middleware('auth:sanctum', 'submission.upload');
+Route::get('submission/{submission}/prescription', DownloadPrescriptionController::class)->name('submission.prescription.download')->middleware('auth:sanctum', 'submission.download');
+Route::delete('submission/{submission}/prescription', DeletePrescriptionController::class)->name('submission.prescription')->middleware('auth:sanctum', 'submission.delete');
 
