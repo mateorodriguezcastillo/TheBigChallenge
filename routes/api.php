@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\GetSubmissionController;
+use App\Http\Controllers\GetSubmissionsController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\StoreSubmissionController;
 use Illuminate\Http\Request;
@@ -25,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('/submission')
 ->name('submission.')
 ->group(function () {
+  Route::get('/', GetSubmissionsController::class)->name('index')->middleware('auth:sanctum');
   Route::get('/{submission}', GetSubmissionController::class)->name('show')->middleware('auth:sanctum', 'submission.show');
   Route::post('/', StoreSubmissionController::class)->name('store')->middleware('auth:sanctum');
 });
