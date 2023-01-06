@@ -10,8 +10,8 @@ class Role extends Model
 {
     use HasFactory;
 
-    public const DOCTOR = 1;
-    public const PATIENT = 2;
+    public const DOCTOR = 'doctor';
+    public const PATIENT = 'patient';
 
     protected $fillable = [
         'name',

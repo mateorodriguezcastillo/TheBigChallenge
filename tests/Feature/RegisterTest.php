@@ -27,52 +27,52 @@ class RegisterTest extends TestCase
                 'email' => 'mateo@mail.com',
                 'password' => 'Mateo123!',
                 'password_confirmation' => 'Mateo123!',
-                'role_id' => Role::DOCTOR,
+                'role' => Role::DOCTOR,
             ]],
             ['no Password' => [
                 'name' => 'mateo',
                 'email' => 'mateo@mail.com',
-                'role_id' => Role::DOCTOR,
+                'role' => Role::DOCTOR,
             ]],
             ['no Password Confirmation' => [
                 'name' => 'mateo',
                 'email' => 'mateo@mail.com',
                 'password' => 'Mateo123!',
-                'role_id' => Role::DOCTOR,
+                'role' => Role::DOCTOR,
             ]],
             ['no email' => [
                 'name' => 'mateo',
                 'password' => 'Mateo123!',
                 'password_confirmation' => 'Mateo123!',
-                'role_id' => Role::DOCTOR,
+                'role' => Role::DOCTOR,
             ]],
             ['invalid email' => [
                 'name' => 'mateo',
                 'email' => 'mateo.com',
                 'password' => 'Mateo123!',
                 'password_confirmation' => 'Mateo123!',
-                'role_id' => Role::DOCTOR,
+                'role' => Role::DOCTOR,
             ]],
             ['invalid password' => [
                 'name' => 'mateo',
                 'email' => 'mateo@mail.com',
                 'password' => 'mateo',
                 'password_confirmation' => 'mateo',
-                'role_id' => Role::DOCTOR,
+                'role' => Role::DOCTOR,
             ]],
             ['invalid password confirmation' => [
                 'name' => 'mateo',
                 'email' => '',
                 'password' => 'Mateo123!',
                 'password_confirmation' => 'Mateo123',
-                'role_id' => Role::DOCTOR,
+                'role' => Role::DOCTOR,
             ]],
             ['invalid role' => [
                 'name' => 'mateo',
                 'email' => '',
                 'password' => 'Mateo123!',
                 'password_confirmation' => 'Mateo123!',
-                'role_id' => 10,
+                'role' => 'invalid_role',
             ]],
         ];
     }
@@ -82,7 +82,7 @@ class RegisterTest extends TestCase
         'email' => 'mateo@mail.com',
         'password' => 'Mateo123!',
         'password_confirmation' => 'Mateo123!',
-        'role_id' => Role::DOCTOR,
+        'role' => Role::DOCTOR,
     ];
 
     public function testRegisterSuccessfully(): void
