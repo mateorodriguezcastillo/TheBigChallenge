@@ -22,6 +22,7 @@ class SubmissionTransformer extends Transformer
     protected $load = [
         'patient',
         'doctor',
+        'prescription'
     ];
 
     /**

@@ -31,7 +31,7 @@ class RegisterRequest extends FormRequest
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
             'password' => ['required', 'confirmed', Password::min(6)->letters()->mixedCase()->numbers()->symbols()],
-            'role_id' => ['required', 'integer', 'exists:roles,id'],
+            'role' => ['required', 'string', 'exists:roles,name'],
         ];
     }
 
