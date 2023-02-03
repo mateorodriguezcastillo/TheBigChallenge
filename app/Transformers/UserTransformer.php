@@ -37,6 +37,7 @@ class UserTransformer extends Transformer
             'name' => (string) $user->name,
             'email' => (string) $user->email,
             'role' => (string) $user->role->name,
+            'isComplete' => (bool) $user->isComplete,
         ];
     }
 }

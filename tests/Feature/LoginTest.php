@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
@@ -14,10 +15,11 @@ class LoginTest extends TestCase
     public function testLoginSuccess(): void
     {
         $userInfo = [
+            'name' => 'Mateo',
             'email' => 'mateo@mail.com',
             'password' => 'Mateo123!',
         ];
-        User::newFactory()->create($userInfo);
+        User::newFactory()->patient()->create($userInfo);
         $this->postJson('api/login', $userInfo)
             ->assertStatus(200)
             ->assertJsonStructure([
@@ -25,6 +27,7 @@ class LoginTest extends TestCase
                     'id',
                     'name',
                     'email',
+                    'role',
                 ],
                 'token',
             ]);

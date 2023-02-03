@@ -21,9 +21,39 @@ class SubmissionFactory extends Factory
             'patient_id' => UserFactory::new()->patient()->create()->id,
             'doctor_id' => UserFactory::new()->doctor()->create()->id,
             'title' => $this->faker->sentence,
-            'info' => $this->faker->paragraph,
-            'symptoms' => $this->faker->paragraph,
+            'symptoms' => $this->faker->sentence,
             'status' => $this->faker->randomElement(Status::keys()),
         ];
+    }
+
+    /**
+     * @return \Database\Factories\SubmissionFactory
+     */
+    public function inProgress(): SubmissionFactory
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => Status::IN_PROGRESS,
+        ]);
+    }
+
+    /**
+     * @return \Database\Factories\SubmissionFactory
+     */
+    public function done(): SubmissionFactory
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => Status::DONE,
+        ]);
+    }
+
+    /**
+     * @return \Database\Factories\SubmissionFactory
+     */
+    public function pending(): SubmissionFactory
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => Status::PENDING,
+            'doctor_id' => null,
+        ]);
     }
 }

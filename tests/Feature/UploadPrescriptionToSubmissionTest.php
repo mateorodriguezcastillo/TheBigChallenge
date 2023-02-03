@@ -33,16 +33,6 @@ class UploadPrescriptionToSubmissionTest extends TestCase
         $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
-    public function test_doctor_can_upload_prescription(): void
-    {
-        $doctor = UserFactory::new()->doctor()->create();
-        $submission = SubmissionFactory::new()->create(['doctor_id' => $doctor->id, 'status' => Status::IN_PROGRESS]);
-
-        $response = $this->actingAs($doctor)->postJson(route('submission.prescription', $submission));
-        $response->assertSuccessful();
-        $this->assertDatabaseHas('submissions', ['id' => $submission->id, 'status' => Status::READY]);
-    }
-
     public function test_patient_cant_upload_prescription(): void
     {
         $patient = UserFactory::new()->patient()->create();

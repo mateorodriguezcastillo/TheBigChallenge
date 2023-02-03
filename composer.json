@@ -12,7 +12,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "league/flysystem-aws-s3-v3": "^3.10"
+        "league/flysystem-aws-s3-v3": "^3.10",
         "laravel/ui": "^4.1",
         "rexlabs/enum": "^2.2"
     },

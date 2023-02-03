@@ -20,7 +20,6 @@ return new class extends Migration
             //foreign key to the user table named doctor_id (doctor may not taken the submission so it can be null)
             $table->foreignId('doctor_id')->nullable()->constrained('users');
             $table->string('title');
-            $table->string('info');
             $table->string('symptoms');
             //status can be pending, approved, rejected
             $table->string('status')->default('pending');

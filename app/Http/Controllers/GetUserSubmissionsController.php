@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Submission;
 use App\Models\User;
 use App\Transformers\SubmissionTransformer;
 use Illuminate\Http\JsonResponse;
@@ -14,7 +13,7 @@ class GetUserSubmissionsController extends Controller
     {
         $submissions = $user->submissions()
             ->filter($request->all())
-            ->paginate(15)
+            ->paginate(8)
             ->withQueryString();
 
         return responder()
