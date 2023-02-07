@@ -25,7 +25,6 @@ class StoreSubmissionRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:150'],
-            'info' => ['required', 'string', 'max:350'],
             'symptoms' => ['required', 'string', 'max:250'],
         ];
     }
