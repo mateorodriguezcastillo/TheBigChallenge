@@ -6,10 +6,15 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "cerbero/laravel-enum": "^1.3",
+        "flugger/laravel-responder": "^3.2",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "league/flysystem-aws-s3-v3": "^3.10",
+        "laravel/ui": "^4.1",
+        "rexlabs/enum": "^2.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -18,7 +23,8 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0"
+        "spatie/laravel-ignition": "^1.0",
+        "worksome/coding-style": "^2.3"
     },
     "autoload": {
         "psr-4": {
@@ -45,7 +51,14 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
-        ]
+        ],
+        "phpcs": "vendor/bin/phpcs",
+        "php-cs-fixer": "vendor/bin/php-cs-fixer fix --ansi",
+        "php-cs-fixer-ci": "vendor/bin/php-cs-fixer fix --dry-run --ansi",
+        "phpcbf": "vendor/bin/phpcbf",
+        "phpstan": "vendor/bin/phpstan analyse",
+        "rector-ci": "vendor/bin/rector process --dry-run --ansi",
+        "rector": "vendor/bin/rector process --ansi"
     },
     "extra": {
         "laravel": {
@@ -57,7 +70,9 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "worksome/coding-style": true
         }
     },
     "minimum-stability": "dev",

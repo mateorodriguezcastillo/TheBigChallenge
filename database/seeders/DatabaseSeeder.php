@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Submission;
+use Database\Factories\SubmissionFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,11 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // SubmissionFactory::new()->pending()->create(10);
+        // SubmissionFactory::new()->inProgress()->create(10);
+        // SubmissionFactory::new()->done()->create(10);
+        Submission::factory()->pending()->count(10)->create();
     }
 }
