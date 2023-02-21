@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSubmissionRequest extends FormRequest
+class CompleteProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class StoreSubmissionRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->role->name === 'patient';
+        return true;
     }
 
     /**
@@ -24,8 +24,10 @@ class StoreSubmissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'string', 'max:150'],
-            'symptoms' => ['required', 'string', 'max:250'],
+            'phone' => 'required|string',
+            'weight' => 'required|numeric',
+            'height' => 'required|numeric',
+            'other_info' => 'nullable|string|max:255',
         ];
     }
 }

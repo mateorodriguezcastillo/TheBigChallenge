@@ -12,7 +12,7 @@ class GetSubmissionsController extends Controller
     public function __invoke(Request $request): JsonResponse
     {
         $submissions = Submission::filter($request->all())
-            ->paginate(15)
+            ->paginate(8)
             ->withQueryString();
 
         return responder()

@@ -27,7 +27,7 @@ class UploadPrescriptionController extends Controller
             'mime_type' => $mimeType,
             'size' => $request->file('prescription')->getSize()
         ]);
-        $submission->status = Status::READY;
+        $submission->status = Status::DONE;
         $submission->save();
         $submission->patient->notify(new PrescriptionUploaded($submission));
         return responder()

@@ -56,7 +56,7 @@ class GetUserSubmissionsTest extends TestCase
         $user = UserFactory::new()->doctor()->create();
         SubmissionFactory::new()->count(10)->create(['doctor_id' => $user->id, 'status' => 'pending']);
         SubmissionFactory::new()->count(10)->create(['doctor_id' => $user->id, 'status' => 'in_progress']);
-        SubmissionFactory::new()->count(10)->create(['doctor_id' => $user->id, 'status' => 'ready']);
+        SubmissionFactory::new()->count(10)->create(['doctor_id' => $user->id, 'status' => 'done']);
 
         $response = $this->actingAs($user)->getJson(route('submission.user', $user->id) . '?status=pending');
         $response->assertSuccessful();
@@ -68,7 +68,7 @@ class GetUserSubmissionsTest extends TestCase
         $user = UserFactory::new()->doctor()->create();
         SubmissionFactory::new()->count(20)->create(['doctor_id' => $user->id, 'status' => 'pending']);
         SubmissionFactory::new()->count(10)->create(['doctor_id' => $user->id, 'status' => 'in_progress']);
-        SubmissionFactory::new()->count(10)->create(['doctor_id' => $user->id, 'status' => 'ready']);
+        SubmissionFactory::new()->count(10)->create(['doctor_id' => $user->id, 'status' => 'done']);
 
         $response = $this->actingAs($user)->getJson(route('submission.user', $user->id) . '?status=pending&page=2');
         $response->assertSuccessful();
@@ -80,7 +80,7 @@ class GetUserSubmissionsTest extends TestCase
         $user = UserFactory::new()->patient()->create();
         SubmissionFactory::new()->count(10)->create(['patient_id' => $user->id, 'status' => 'pending']);
         SubmissionFactory::new()->count(10)->create(['patient_id' => $user->id, 'status' => 'in_progress']);
-        SubmissionFactory::new()->count(10)->create(['patient_id' => $user->id, 'status' => 'ready']);
+        SubmissionFactory::new()->count(10)->create(['patient_id' => $user->id, 'status' => 'done']);
 
         $response = $this->actingAs($user)->getJson(route('submission.user', $user->id) . '?status=pending');
         $response->assertSuccessful();
@@ -92,7 +92,7 @@ class GetUserSubmissionsTest extends TestCase
         $user = UserFactory::new()->patient()->create();
         SubmissionFactory::new()->count(20)->create(['patient_id' => $user->id, 'status' => 'pending']);
         SubmissionFactory::new()->count(10)->create(['patient_id' => $user->id, 'status' => 'in_progress']);
-        SubmissionFactory::new()->count(10)->create(['patient_id' => $user->id, 'status' => 'ready']);
+        SubmissionFactory::new()->count(10)->create(['patient_id' => $user->id, 'status' => 'done']);
 
         $response = $this->actingAs($user)->getJson(route('submission.user', $user->id) . '?status=pending&page=2');
         $response->assertSuccessful();

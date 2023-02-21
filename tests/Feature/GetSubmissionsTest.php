@@ -34,7 +34,7 @@ class GetSubmissionsTest extends TestCase
     {
         Submission::factory()->count(5)->create(['status' => 'pending']);
         Submission::factory()->count(5)->create(['status' => 'in_progress']);
-        Submission::factory()->count(5)->create(['status' => 'ready']);
+        Submission::factory()->count(5)->create(['status' => 'done']);
         $user = User::first();
         $response = $this->actingAs($user)->getJson(route('submission.index', ['status' => 'pending']));
         $response->assertSuccessful();
