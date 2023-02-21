@@ -24,7 +24,7 @@ class CompleteProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone' => 'required|string|max:15',
+            'phone' => 'required|string',
             'weight' => 'required|numeric',
             'height' => 'required|numeric',
             'other_info' => 'nullable|string|max:255',

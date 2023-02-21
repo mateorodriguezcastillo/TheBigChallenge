@@ -47,7 +47,7 @@ class AcceptedSubmission extends Notification
                     ->line('Your submission has been taken by Dr. ' . $this->submission->doctor->name . '.')
                     ->line('We will notify you when your prescription is ready.')
                     ->line('You can check the status of your submission at any time by clicking the button below.')
-                    ->action('View Submission', url('/submissions/' . $this->submission->id))
+                    ->action('View Submission', 'http://localhost:3000/submission/' . $this->submission->id)
                     ->line('Thank you for using our application!');
     }
 
